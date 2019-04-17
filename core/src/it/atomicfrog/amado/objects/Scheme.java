@@ -41,15 +41,17 @@ public class Scheme {
         }
     }
 
-    private void init(){
+    public void init(){
+        Vector2 tempPos = position;
+
         for(int y=0;y<size;y++){
             for(int x=0;x<size;x++){
-                Vector2 localPos = new Vector2(position.x - pixelSize/2,position.y - pixelSize/2);
+                Vector2 localPos = new Vector2(tempPos.x - pixelSize/2,tempPos.y - pixelSize/2);
                 squares[x][y] = new Square(localPos, MyColors.randomColor(),squareSize);
-                position = new Vector2(position.x + (squareSize + spacing), position.y);
+                tempPos = new Vector2(tempPos.x + (squareSize + spacing), tempPos.y);
             }
 
-            position = new Vector2(0, position.y + (squareSize + spacing));
+            tempPos = new Vector2(0, tempPos.y + (squareSize + spacing));
         }
     }
 }

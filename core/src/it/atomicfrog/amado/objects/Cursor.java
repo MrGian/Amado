@@ -1,10 +1,7 @@
 package it.atomicfrog.amado.objects;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.Color;
-import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
-import com.badlogic.gdx.math.Vector2;
 
 import it.atomicfrog.amado.utils.MyColors;
 import it.atomicfrog.amado.utils.SimpleDirectionGestureDetector;
@@ -14,12 +11,14 @@ public class Cursor {
     private Square current;
     private Square old;
     private Scheme scheme;
+    private Score score;
 
     private int curX = 0;
     private int curY = 3;
 
-    public Cursor(Scheme scheme){
+    public Cursor(Score score, Scheme scheme){
         this.scheme = scheme;
+        this.score = score;
 
         Gdx.input.setInputProcessor(detector);
 
@@ -61,7 +60,7 @@ public class Cursor {
             if(curX != 0)
                 curX--;
             current = scheme.squares[curX][curY];
-            changeColor();
+            updateSquare();
         }
 
         @Override
@@ -70,7 +69,7 @@ public class Cursor {
             if(curX != scheme.size - 1)
                 curX++;
             current = scheme.squares[curX][curY];
-            changeColor();
+            updateSquare();
         }
 
         @Override
@@ -79,7 +78,7 @@ public class Cursor {
             if(curY != scheme.size - 1)
                 curY++;
             current = scheme.squares[curX][curY];
-            changeColor();
+            updateSquare();
         }
 
         @Override
@@ -88,11 +87,11 @@ public class Cursor {
             if(curY != 0)
                 curY--;
             current = scheme.squares[curX][curY];
-            changeColor();
+            updateSquare();
         }
     });
 
-    private void changeColor(){
+    private void updateSquare(){
         if(old.color != current.color){
             int j = 0;
             while (MyColors.colors[j] == old.color || MyColors.colors[j] == current.color){
@@ -103,5 +102,8 @@ public class Cursor {
             }
             scheme.squares[curX][curY].color = MyColors.colors[j];
         }
+        
+        if(score.check())
+            score.addScore();
     }
 }
