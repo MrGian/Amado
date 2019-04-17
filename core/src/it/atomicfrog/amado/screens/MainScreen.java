@@ -1,26 +1,29 @@
 package it.atomicfrog.amado.screens;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
-import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.graphics.g2d.Sprite;
 
 import it.atomicfrog.amado.Main;
-import it.atomicfrog.amado.objects.Cursor;
-import it.atomicfrog.amado.objects.Scheme;
-import it.atomicfrog.amado.objects.Square;
+import it.atomicfrog.amado.objects.Background;
 
 public class MainScreen implements Screen {
     Main main;
 
-    Scheme scheme;
-    Cursor cursor;
+    Texture title;
+    Texture help;
+
+    Sprite play;
 
     public MainScreen(Main main){
         this.main = main;
 
-        scheme = new Scheme();
-        cursor = new Cursor(scheme);
+        title = new Texture("title.png");
+        play = new Sprite(new Texture("button.png"));
+        help = new Texture("button1.png");
+
+
     }
 
     @Override
@@ -30,11 +33,17 @@ public class MainScreen implements Screen {
 
     @Override
     public void render(float delta) {
-        scheme.render(main.renderer);
-        cursor.render(main.renderer);
+        Background.render(main.renderer);
+        main.abatch.begin();
+        main.abatch.draw(title,-title.getWidth()/2f, 450f);
+        main.abatch.draw(play,-play.getWidth()/2f,-play.getHeight()/2f);
+        main.abatch.draw(help,-help.getWidth()/2f, -400f);
+        main.abatch.end();
 
+
+        if(Gdx.input.justTouched())
+            main.setScreen(new GameScreen(main));
     }
-
 
     @Override
     public void resize(int width, int height) {

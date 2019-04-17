@@ -13,8 +13,8 @@ public class Scheme {
 
     final int size = 4;
 
-    float squareSize = 1.1f;
-    float spacing = 0.2f;
+    float squareSize;
+    float spacing;
 
     Vector2 position;
 
@@ -23,8 +23,10 @@ public class Scheme {
 
     Square[][] squares = new Square[size][size];
 
-    public Scheme(){
-        position = new Vector2(0,0);
+    public Scheme(Vector2 position, float squareSize, float spacing){
+        this.position = position;
+        this.squareSize = squareSize;
+        this.spacing = spacing;
         pixelSize = (squareSize * size) + (spacing * (size - 1));
 
         init();

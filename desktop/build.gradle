@@ -30,7 +30,7 @@ task dist(type: Jar) {
     from files(project.assetsDir);
  
     manifest {
-        attributes 'MainScreen-Class': project.mainClassName
+        attributes 'GameScreen-Class': project.mainClassName
     }
 }
 
