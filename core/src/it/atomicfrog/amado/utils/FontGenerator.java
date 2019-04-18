@@ -11,7 +11,7 @@ public class FontGenerator {
 
         FreeTypeFontGenerator.FreeTypeFontParameter parameter = new FreeTypeFontGenerator.FreeTypeFontParameter();
         parameter.size = size;
-        parameter.color = Color.BLACK;
+        parameter.color = MyColors.uicolors[1];
         parameter.characters = "0123456789TIME";
 
         return generator.generateFont(parameter);

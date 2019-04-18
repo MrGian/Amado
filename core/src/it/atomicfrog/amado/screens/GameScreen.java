@@ -14,6 +14,7 @@ import it.atomicfrog.amado.objects.Scheme;
 import it.atomicfrog.amado.objects.Score;
 import it.atomicfrog.amado.objects.Square;
 import it.atomicfrog.amado.objects.Time;
+import it.atomicfrog.amado.utils.MyColors;
 
 public class GameScreen implements Screen {
     Main main;
@@ -27,6 +28,7 @@ public class GameScreen implements Screen {
 
     public GameScreen(Main main){
         this.main = main;
+
         scheme = new Scheme(new Vector2(0,2f),1.1f,0.2f);
         oscheme = new Scheme(new Vector2(0,-6f),0.5f,0.09f);
 

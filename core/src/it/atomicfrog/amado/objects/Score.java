@@ -47,7 +47,6 @@ public class Score {
         layout.setText(font,String.valueOf(score));
 
         abatch.begin();
-        font.setColor(Color.BLACK);
         font.draw(abatch,String.valueOf(score),-layout.width/2f,850f);
         fontt.draw(abatch,"Build170419_1 by Gianmatteo Palmieri",0,-900f);
         abatch.end();

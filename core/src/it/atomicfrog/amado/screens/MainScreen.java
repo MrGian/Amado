@@ -8,6 +8,7 @@ import com.badlogic.gdx.math.Vector2;
 
 import it.atomicfrog.amado.Main;
 import it.atomicfrog.amado.objects.Background;
+import it.atomicfrog.amado.utils.MyColors;
 
 public class MainScreen implements Screen {
     Main main;
@@ -17,12 +18,12 @@ public class MainScreen implements Screen {
 
     Sprite play;
 
-    Vector2 pos;
-
     public MainScreen(Main main){
         this.main = main;
 
-        title = new Texture("title.png");
+        MyColors.init();
+
+        title = new Texture(MyColors.title);
         play = new Sprite(new Texture("button.png"));
         help = new Texture("button1.png");
 
