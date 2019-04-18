@@ -20,7 +20,7 @@ public class Score {
     public Score(Scheme scheme, Scheme oscheme){
         this.scheme = scheme;
         this.oscheme = oscheme;
-        font = new FontGenerator().generate();
+        font = FontGenerator.generate(120);
         fontt = new BitmapFont();
         layout = new GlyphLayout();
     }

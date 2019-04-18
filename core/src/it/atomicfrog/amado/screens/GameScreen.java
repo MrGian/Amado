@@ -13,6 +13,7 @@ import it.atomicfrog.amado.objects.Line;
 import it.atomicfrog.amado.objects.Scheme;
 import it.atomicfrog.amado.objects.Score;
 import it.atomicfrog.amado.objects.Square;
+import it.atomicfrog.amado.objects.Time;
 
 public class GameScreen implements Screen {
     Main main;
@@ -22,6 +23,7 @@ public class GameScreen implements Screen {
 
     Cursor cursor;
     Score score;
+    Time time;
 
     public GameScreen(Main main){
         this.main = main;
@@ -29,8 +31,8 @@ public class GameScreen implements Screen {
         oscheme = new Scheme(new Vector2(0,-6f),0.5f,0.09f);
 
         score = new Score(scheme,oscheme);
-
         cursor = new Cursor(score, scheme);
+        time = new Time(oscheme);
     }
 
     @Override
@@ -45,6 +47,7 @@ public class GameScreen implements Screen {
         scheme.render(main.renderer);
         oscheme.render(main.renderer);
         cursor.render(main.renderer);
+        time.render(main.renderer,main.abatch,main.camera,main.acamera);
         score.render(main.abatch);
 
 
