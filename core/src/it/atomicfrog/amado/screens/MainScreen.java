@@ -4,6 +4,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
+import com.badlogic.gdx.math.Vector2;
 
 import it.atomicfrog.amado.Main;
 import it.atomicfrog.amado.objects.Background;
@@ -15,6 +16,8 @@ public class MainScreen implements Screen {
     Texture help;
 
     Sprite play;
+
+    Vector2 pos;
 
     public MainScreen(Main main){
         this.main = main;
@@ -36,7 +39,7 @@ public class MainScreen implements Screen {
         Background.render(main.renderer);
         main.abatch.begin();
         main.abatch.draw(title,-title.getWidth()/2f, 450f);
-        main.abatch.draw(play,-play.getWidth()/2f,-play.getHeight()/2f);
+        main.abatch.draw(play,-play.getWidth()/2f,-play.getHeight());
         main.abatch.draw(help,-help.getWidth()/2f, -400f);
         main.abatch.end();
 

@@ -103,7 +103,10 @@ public class Cursor {
             scheme.squares[curX][curY].color = MyColors.colors[j];
         }
         
-        if(score.check())
+        if(score.check()){
             score.addScore();
+            current = scheme.squares[curX][curY];
+        }
+
     }
 }
