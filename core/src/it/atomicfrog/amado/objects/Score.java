@@ -5,30 +5,28 @@ import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.GlyphLayout;
 
+import it.atomicfrog.amado.screens.GameScreen;
 import it.atomicfrog.amado.utils.FontGenerator;
 
 public class Score {
     int score = 0;
-    Scheme scheme;
-    Scheme oscheme;
 
     BitmapFont font;
-    BitmapFont fontt;
-
     GlyphLayout layout;
 
-    public Score(Scheme scheme, Scheme oscheme){
-        this.scheme = scheme;
-        this.oscheme = oscheme;
+    GameScreen game;
+
+    public Score(GameScreen game){
+        this.game = game;
+
         font = FontGenerator.generate(120);
-        fontt = new BitmapFont();
         layout = new GlyphLayout();
     }
 
     public boolean check(){
-        for(int y=0;y<scheme.size;y++){
-            for(int x=0;x<scheme.size;x++) {
-                if(scheme.squares[x][y].color != oscheme.squares[x][y].color)
+        for(int y=0;y<game.scheme.size;y++){
+            for(int x=0;x<game.scheme.size;x++) {
+                if(game.scheme.squares[x][y].color != game.oscheme.squares[x][y].color)
                     return false;
             }
         }
@@ -39,15 +37,28 @@ public class Score {
     public void addScore(){
         score++;
 
-        scheme.init();
-        oscheme.init();
+        if(score == 5)
+            game.scheme.size = game.oscheme.size = 4;
+
+        if(score == 10)
+            game.scheme.size = game.oscheme.size = 5;
+
+        if(score == 15){
+            game.time.tick = 3;
+        }
+
+        reset();
     }
 
     public void loose(){
         score = 0;
 
-        scheme.init();
-        oscheme.init();
+        game.scheme.size = game.oscheme.size = 3;
+        game.cursor.curX = game.cursor.curY = 0;
+        game.time.playing = false;
+
+
+        reset();
     }
 
     public void render(Batch abatch){
@@ -55,7 +66,12 @@ public class Score {
 
         abatch.begin();
         font.draw(abatch,String.valueOf(score),-layout.width/2f,850f);
-        fontt.draw(abatch,"Build170419_1 by Gianmatteo Palmieri",0,-900f);
         abatch.end();
+    }
+
+    private void reset(){
+        game.scheme.init();
+        game.oscheme.init();
+        game.time.updatePosition();
     }
 }

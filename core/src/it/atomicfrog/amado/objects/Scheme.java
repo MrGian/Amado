@@ -11,23 +11,28 @@ import it.atomicfrog.amado.utils.MyColors;
 
 public class Scheme {
 
-    final int size = 4;
+    int size = 3;
 
     float squareSize;
     float spacing;
 
-    Vector2 position;
+    private Vector2 position;
 
     float pixelSize;
 
 
-    Square[][] squares = new Square[size][size];
+    Square[][] squares;
 
-    public Scheme(Vector2 position, float squareSize, float spacing){
-        this.position = position;
-        this.squareSize = squareSize;
-        this.spacing = spacing;
-        pixelSize = (squareSize * size) + (spacing * (size - 1));
+    public Scheme(boolean oscheme){
+        if(!oscheme){
+            position = new Vector2(0,2.5f);
+            squareSize = 1.1f;
+            spacing = 0.2f;
+        }else{
+            position = new Vector2(0,-5f);
+            squareSize = 0.5f;
+            spacing = 0.09f;
+        }
 
         init();
 
@@ -42,6 +47,10 @@ public class Scheme {
     }
 
     public void init(){
+        squares = new Square[size][size];
+
+        pixelSize = (squareSize * size) + (spacing * (size - 1));
+
         Vector2 tempPos = position;
 
         for(int y=0;y<size;y++){

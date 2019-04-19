@@ -9,7 +9,7 @@ public class Line {
     public static void render(ShapeRenderer renderer){
         renderer.begin(ShapeRenderer.ShapeType.Filled);
         renderer.setColor(MyColors.colors[0]);
-        renderer.rect(-4.5f,-4f,9f,0.1f);
+        renderer.rect(-4.5f,-3f,9f,0.1f);
         renderer.end();
     }
 }

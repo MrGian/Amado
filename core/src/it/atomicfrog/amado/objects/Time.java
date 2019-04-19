@@ -11,13 +11,14 @@ import com.badlogic.gdx.math.Vector3;
 import java.util.Timer;
 import java.util.TimerTask;
 
+import it.atomicfrog.amado.screens.GameScreen;
 import it.atomicfrog.amado.utils.FontGenerator;
 import it.atomicfrog.amado.utils.MyColors;
 import it.atomicfrog.amado.utils.Projector;
 
 public class Time {
 
-    final int tottime = 3;
+    final int tottime = 15;
 
     public int time = tottime;
     public int tick = 5;
@@ -32,12 +33,17 @@ public class Time {
     BitmapFont font;
     GlyphLayout layout;
 
-    Score score;
+    Timer timer;
 
-    public Time(Scheme oscheme, Score score){
-        this.score = score;
+    GameScreen game;
 
-        position = new Vector2(-2.25f - oscheme.pixelSize/4f - width/2f,-7.15f);
+    public Time(GameScreen game){
+        this.game = game;
+
+        updatePosition();
+
+        timer = new Timer();
+        timer.scheduleAtFixedRate(ticktimer, tick*1000, tick*1000);
 
         font = FontGenerator.generate(50);
         layout = new GlyphLayout();
@@ -55,7 +61,7 @@ public class Time {
 
         layout.setText(font,"TIME");
 
-        Vector2 txtpos = Projector.project(position.x + width/2,-4.3f,camera,acamera);
+        Vector2 txtpos = Projector.project(position.x + width/2,-3.3f,camera,acamera);
 
         abacth.begin();
         font.draw(abacth,"TIME",txtpos.x - layout.width/2f,txtpos.y);
@@ -65,4 +71,23 @@ public class Time {
     public void reset(){
         time = tottime;
     }
+
+    public void updatePosition(){
+        position = new Vector2(-2.25f - game.oscheme.pixelSize/4f - width/2f,-6.15f);
+    }
+
+    TimerTask ticktimer = new TimerTask() {
+        @Override
+        public void run() {
+            if(playing){
+                time--;
+
+                if(time == 0){
+                    game.score.loose();
+                    reset();
+                    game.cursor.setCurrent();
+                }
+            }
+        }
+    };
 }

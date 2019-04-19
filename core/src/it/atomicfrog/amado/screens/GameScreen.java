@@ -22,27 +22,22 @@ import it.atomicfrog.amado.utils.MyColors;
 public class GameScreen implements Screen {
     Main main;
 
-    Scheme scheme;
-    Scheme oscheme;
+    public Scheme scheme;
+    public Scheme oscheme;
 
-    Cursor cursor;
-    Score score;
-    Time time;
-
-    Timer timer;
+    public Cursor cursor;
+    public Score score;
+    public Time time;
 
     public GameScreen(Main main){
         this.main = main;
 
-        scheme = new Scheme(new Vector2(0,2f),1.1f,0.2f);
-        oscheme = new Scheme(new Vector2(0,-6f),0.5f,0.09f);
+        scheme = new Scheme(false);
+        oscheme = new Scheme(true);
 
-        score = new Score(scheme,oscheme);
-        time = new Time(oscheme, score);
-        cursor = new Cursor(score, scheme,time);
-
-        timer = new Timer();
-        timer.scheduleAtFixedRate(ticktimer, time.tick*1000, time.tick*1000);
+        score = new Score(this);
+        time = new Time(this);
+        cursor = new Cursor(this);
     }
 
     @Override
@@ -88,19 +83,4 @@ public class GameScreen implements Screen {
     public void dispose() {
 
     }
-
-    TimerTask ticktimer = new TimerTask() {
-        @Override
-        public void run() {
-            if(time.playing){
-                time.time--;
-
-                if(time.time == 0){
-                    score.loose();
-                    time.reset();
-                    cursor.setCurrent();
-                }
-            }
-        }
-    };
 }
