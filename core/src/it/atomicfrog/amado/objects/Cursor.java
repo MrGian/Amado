@@ -12,13 +12,15 @@ public class Cursor {
     private Square old;
     private Scheme scheme;
     private Score score;
+    private Time time;
 
     private int curX = 0;
     private int curY = 3;
 
-    public Cursor(Score score, Scheme scheme){
+    public Cursor(Score score, Scheme scheme, Time time){
         this.scheme = scheme;
         this.score = score;
+        this.time = time;
 
         Gdx.input.setInputProcessor(detector);
 
@@ -59,7 +61,7 @@ public class Cursor {
             old = scheme.squares[curX][curY];
             if(curX != 0)
                 curX--;
-            current = scheme.squares[curX][curY];
+            //current = scheme.squares[curX][curY];
             updateSquare();
         }
 
@@ -68,7 +70,7 @@ public class Cursor {
             old = scheme.squares[curX][curY];
             if(curX != scheme.size - 1)
                 curX++;
-            current = scheme.squares[curX][curY];
+            //current = scheme.squares[curX][curY];
             updateSquare();
         }
 
@@ -77,7 +79,7 @@ public class Cursor {
             old = scheme.squares[curX][curY];
             if(curY != scheme.size - 1)
                 curY++;
-            current = scheme.squares[curX][curY];
+            //current = scheme.squares[curX][curY];
             updateSquare();
         }
 
@@ -86,12 +88,16 @@ public class Cursor {
             old = scheme.squares[curX][curY];
             if(curY != 0)
                 curY--;
-            current = scheme.squares[curX][curY];
+            //current = scheme.squares[curX][curY];
             updateSquare();
         }
     });
 
     private void updateSquare(){
+        current = scheme.squares[curX][curY];
+
+        time.playing = true;
+
         if(old.color != current.color){
             int j = 0;
             while (MyColors.colors[j] == old.color || MyColors.colors[j] == current.color){
@@ -105,7 +111,8 @@ public class Cursor {
         
         if(score.check()){
             score.addScore();
-            current = scheme.squares[curX][curY];
+            time.reset();
+            //current = scheme.squares[curX][curY];
         }
 
     }

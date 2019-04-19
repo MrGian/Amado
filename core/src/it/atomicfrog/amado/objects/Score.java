@@ -43,6 +43,13 @@ public class Score {
         oscheme.init();
     }
 
+    public void loose(){
+        score = 0;
+
+        scheme.init();
+        oscheme.init();
+    }
+
     public void render(Batch abatch){
         layout.setText(font,String.valueOf(score));
 

@@ -7,7 +7,7 @@ import org.omg.CORBA.PUBLIC_MEMBER;
 import java.util.Random;
 
 public class MyColors {
-    private final static boolean dark = true;
+    private final static boolean dark = false;
 
     public static Color[] colors = {Color.valueOf("EA4335"),Color.valueOf("FBBC04"),Color.valueOf("4285F4")};
     public static Color white = Color.valueOf("F6EDDD");

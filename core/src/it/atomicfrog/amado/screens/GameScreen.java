@@ -33,8 +33,8 @@ public class GameScreen implements Screen {
         oscheme = new Scheme(new Vector2(0,-6f),0.5f,0.09f);
 
         score = new Score(scheme,oscheme);
-        cursor = new Cursor(score, scheme);
-        time = new Time(oscheme);
+        time = new Time(oscheme, score);
+        cursor = new Cursor(score, scheme,time);
     }
 
     @Override
