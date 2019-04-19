@@ -24,7 +24,7 @@ public class Cursor {
 
         Gdx.input.setInputProcessor(detector);
 
-        current = scheme.squares[curX][curY];
+        setCurrent();
 
     }
 
@@ -93,8 +93,12 @@ public class Cursor {
         }
     });
 
-    private void updateSquare(){
+    public void setCurrent(){
         current = scheme.squares[curX][curY];
+    }
+
+    private void updateSquare(){
+        setCurrent();
 
         time.playing = true;
 

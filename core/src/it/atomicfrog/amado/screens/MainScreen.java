@@ -6,6 +6,8 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.math.Vector2;
 
+import java.util.Timer;
+
 import it.atomicfrog.amado.Main;
 import it.atomicfrog.amado.objects.Background;
 import it.atomicfrog.amado.utils.MyColors;

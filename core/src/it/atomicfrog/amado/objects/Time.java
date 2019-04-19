@@ -19,8 +19,8 @@ public class Time {
 
     final int tottime = 3;
 
-    int time = tottime;
-    int tick = 5;
+    public int time = tottime;
+    public int tick = 5;
 
     public boolean playing = false;
 
@@ -32,14 +32,10 @@ public class Time {
     BitmapFont font;
     GlyphLayout layout;
 
-    Timer timer;
-
     Score score;
 
     public Time(Scheme oscheme, Score score){
         this.score = score;
-        timer = new Timer();
-        timer.scheduleAtFixedRate(ticktimer, tick*1000, tick*1000);
 
         position = new Vector2(-2.25f - oscheme.pixelSize/4f - width/2f,-7.15f);
 
@@ -69,19 +65,4 @@ public class Time {
     public void reset(){
         time = tottime;
     }
-
-    TimerTask ticktimer = new TimerTask() {
-        @Override
-        public void run() {
-            if(playing){
-                time--;
-
-                if(time == 0){
-                    score.loose();
-                    reset();
-                    playing = false;
-                }
-            }
-        }
-    };
 }

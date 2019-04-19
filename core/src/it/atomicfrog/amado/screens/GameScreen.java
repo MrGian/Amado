@@ -6,6 +6,9 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Vector2;
 
+import java.util.Timer;
+import java.util.TimerTask;
+
 import it.atomicfrog.amado.Main;
 import it.atomicfrog.amado.objects.Background;
 import it.atomicfrog.amado.objects.Cursor;
@@ -26,6 +29,8 @@ public class GameScreen implements Screen {
     Score score;
     Time time;
 
+    Timer timer;
+
     public GameScreen(Main main){
         this.main = main;
 
@@ -35,6 +40,9 @@ public class GameScreen implements Screen {
         score = new Score(scheme,oscheme);
         time = new Time(oscheme, score);
         cursor = new Cursor(score, scheme,time);
+
+        timer = new Timer();
+        timer.scheduleAtFixedRate(ticktimer, time.tick*1000, time.tick*1000);
     }
 
     @Override
@@ -80,4 +88,19 @@ public class GameScreen implements Screen {
     public void dispose() {
 
     }
+
+    TimerTask ticktimer = new TimerTask() {
+        @Override
+        public void run() {
+            if(time.playing){
+                time.time--;
+
+                if(time.time == 0){
+                    score.loose();
+                    time.reset();
+                    cursor.setCurrent();
+                }
+            }
+        }
+    };
 }
